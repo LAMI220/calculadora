@@ -1,20 +1,21 @@
-package calculadoras;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
+package calculadoras;
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class calculadoratarea extends JFrame implements ActionListener {
+public class calculadoraEspecial extends JFrame implements ActionListener {
     private final JTextField display;
     private final JLabel mensajeArriba;
     private final JLabel mensajeAbajo;
 
-    public calculadoratarea(){
+    public calculadoraEspecial(){
        setTitle("Calculadora");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -164,6 +165,7 @@ public class calculadoratarea extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new calculadoratarea());
+        SwingUtilities.invokeLater(() -> new calculadoraEspecial());
     }
 }
+

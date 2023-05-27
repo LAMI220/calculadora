@@ -2,170 +2,89 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package calculadoras;
+package tarea;
 
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class calculadoraEspecial extends JFrame implements ActionListener {
-    private final JTextField display;
-    private final JLabel mensajeArriba;
-    private final JLabel mensajeAbajo;
-
-    public calculadoraEspecial(){
-       setTitle("Calculadora");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        display = new JTextField(10);
-        display.setEditable(false);
-        display.setHorizontalAlignment(JTextField.RIGHT);
-       
-        mensajeArriba = new JLabel("HOLA SOY LAMI");
-        mensajeArriba.setHorizontalAlignment(SwingConstants.CENTER);
-
-        mensajeAbajo = new JLabel("Gracias por usarme ");
-        mensajeAbajo.setHorizontalAlignment(SwingConstants.CENTER);
-
-        
-        JPanel panel = new JPanel(new GridLayout(6, 4));
-        String[] botones = {
-                "7", "8", "9", "+",
-                "4", "5", "6", "-",
-                "1", "2", "3", "*",
-                "0", ".", "%", "/",
-                "√", "Del", "C", "=",
-                "x²","^"
-        };
-
-        for (String boton : botones) {
-            JButton button = new JButton(boton);
-            button.addActionListener(this);
-            panel.add(button);
-        }
-
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(mensajeArriba, BorderLayout.NORTH);
-        getContentPane().add(display, BorderLayout.CENTER);
-        getContentPane().add(mensajeAbajo, BorderLayout.SOUTH);
-        getContentPane().add(panel, BorderLayout.AFTER_LAST_LINE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-
-    /**
-     *
-     * @param e
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        String currentText = display.getText();
-
-        if (command.equals("=")) {
-            try {
-                double result = evaluarExpresion(currentText);
-                display.setText(String.valueOf(result));
-            } catch (Exception ex) {
-                display.setText("Error");
-            } }
-        else if (command.equals("x²")) {
-            double number = Double.parseDouble(currentText);
-            double result = Math.pow(number, 2);
-            display.setText(String.valueOf(result));
-            }
-        else if (command.equals("√")) {
-            double number = Double.parseDouble(currentText);
-            double result = Math.sqrt(number);
-            display.setText(String.valueOf(result));
-            } 
-        else if (command.equals("%")) {
-            double number = Double.parseDouble(currentText);
-            double result = number / 100;
-            display.setText(String.valueOf(result));
-            }
-       
-        else if (command.equals("C")) {
-            display.setText("");
-        } else if (command.equals("Del")) {
-            if (!currentText.isEmpty()) {
-                display.setText(currentText.substring(0, currentText.length() - 1));
-            }}
-        else {
-            display.setText(currentText + command);
-        }
+public class CalculadoraEspecial {
+  public String tipoCalculadora;
+    public String color;
+    public int dimensionPantalla;
+    private String numeroDeSerie;
+    private String nombrePropietario;
+    private String propietario;
+    
+    public CalculadoraEspecial(String enamorado) {
+                this.tipoCalculadora = "Calculadora Básica";
+        this.dimensionPantalla = 10;
+        this.numeroDeSerie = "12345abc";
+        this.color = "Azul";
+        this.nombrePropietario = propietario;
     }
     
+    
+ 
 
-    private double evaluarExpresion(String expresion) throws Exception {
-        return (double) new Object() {
-            int pos = -1, ch;
+        public double sumar(double a, double b) {
+            return a + b;
+        }
 
-            void nextChar() {
-                ch = (++pos < expresion.length()) ? expresion.charAt(pos) : -1;
-            }
+        public double restar(double a, double b) {
+            return a - b;
+        }
 
-            boolean eat(int charToEat) {
-                while (ch == ' ') nextChar();
-                if (ch == charToEat) {
-                    nextChar();
-                    return true;
-                }
+        public double multiplicar(double a, double b) {
+            return a * b;
+        }
+
+        public double dividir(double a, double b) {
+            return a / b;
+        }
+
+        public double raizCuadrada(double a) {
+            return Math.sqrt(a);
+        }
+
+        public boolean esPrimo(int a) {
+            if (a <= 1)
                 return false;
+
+            for (int i = 2; i <= Math.sqrt(a); i++) {
+                if (a % i == 0)
+                    return false;
             }
 
-            double parse() throws Exception {
-                nextChar();
-                double x = parseExpression();
-                if (pos < expresion.length()) throw new Exception("Carácter inesperado: " + (char) ch);
-                return x;
-            }
+            return true;
+        }
 
-            double parseExpression() throws Exception {
-                double x = parseTerm();
-                for (;;) {
-                    if (eat('+')) x += parseTerm();
-                    else if (eat('-')) x -= parseTerm();
-                    else return x;
-                }
-            }
+       
+        public double coseno(double angulo) {
+            return Math.cos(Math.toRadians(angulo));
+        }
 
-            double parseTerm() throws Exception {
-                double x = parseFactor();
-                for (;;) {
-                    if (eat('*')) x *= parseFactor();
-                    else if (eat('/')) x /= parseFactor();
-                    else return x;
-                }
-            }
+        public double reglaDeTres(double a, double b, double c) {
+            return (c * b) / a;
+        }
+        public double valorAbsoluto(double a) {
+            return Math.abs(a);
+        }
 
-            double parseFactor() throws Exception {
-                if (eat('+')) return parseFactor();
-                if (eat('-')) return -parseFactor();
+        public double tangente(double angulo) {
+            return Math.tan(Math.toRadians(angulo));
+        }
 
-                double x;
-                int startPos = this.pos;
-                if (eat('(')) {
-                    x = parseExpression();
-                    eat(')');
-                } else if ((ch >= '0' && ch <= '9') || ch == '.') {
-                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
-                    x = Double.parseDouble(expresion.substring(startPos, this.pos));
+
+        public String factorizacion(int n) {
+            StringBuilder factors = new StringBuilder();
+            int divisor = 2;
+            while (n > 1) {
+                if (n % divisor == 0) {
+                    factors.append(divisor).append(" ");
+                    n /= divisor;
                 } else {
-                    throw new Exception("Número esperado, pero encontrado: " + (char) ch);
+                    divisor++;
                 }
-
-                return x;
             }
-        }.parse();
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new calculadoraEspecial());
-    }
-}
-
+            return factors.toString();
+      }  
+public boolean esPar(int numero) {
+    return numero % 2 == 0;
+}}

@@ -1,0 +1,90 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package tarea;
+
+public class CalculadoraEspecial {
+  public String tipoCalculadora;
+    public String color;
+    public int dimensionPantalla;
+    private String numeroDeSerie;
+    private String nombrePropietario;
+    private String propietario;
+    
+    public CalculadoraEspecial(String enamorado) {
+                this.tipoCalculadora = "Calculadora Básica";
+        this.dimensionPantalla = 10;
+        this.numeroDeSerie = "12345abc";
+        this.color = "Azul";
+        this.nombrePropietario = propietario;
+    }
+    
+    
+ 
+
+        public double sumar(double a, double b) {
+            return a + b;
+        }
+
+        public double restar(double a, double b) {
+            return a - b;
+        }
+
+        public double multiplicar(double a, double b) {
+            return a * b;
+        }
+
+        public double dividir(double a, double b) {
+            return a / b;
+        }
+
+        public double raizCuadrada(double a) {
+            return Math.sqrt(a);
+        }
+
+        public boolean esPrimo(int a) {
+            if (a <= 1)
+                return false;
+
+            for (int i = 2; i <= Math.sqrt(a); i++) {
+                if (a % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+       
+        public double coseno(double angulo) {
+            return Math.cos(Math.toRadians(angulo));
+        }
+
+        public double reglaDeTres(double a, double b, double c) {
+            return (c * b) / a;
+        }
+        public double valorAbsoluto(double a) {
+            return Math.abs(a);
+        }
+
+        public double tangente(double angulo) {
+            return Math.tan(Math.toRadians(angulo));
+        }
+
+
+        public String factorizacion(int n) {
+            StringBuilder factors = new StringBuilder();
+            int divisor = 2;
+            while (n > 1) {
+                if (n % divisor == 0) {
+                    factors.append(divisor).append(" ");
+                    n /= divisor;
+                } else {
+                    divisor++;
+                }
+            }
+            return factors.toString();
+      }  
+public boolean esPar(int numero) {
+    return numero % 2 == 0;
+}}
